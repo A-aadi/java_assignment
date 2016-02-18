@@ -1,4 +1,4 @@
-class Matrix {
+public class Matrix {
 	private int [][] matrix;
 	private int row;
 	private int column;
@@ -12,12 +12,6 @@ class Matrix {
 
 // ----------------------------private methods --------------------------------------
 
-	private void enterValues(int rowPosition, int columnPosition, int value){
-		matrix[rowPosition-1][columnPosition-1] = value;
-	};
-
-
-
 	private Matrix addMatrices(Matrix matrix2){
 		Matrix newMatrix = new Matrix(row, column);
 		for(int i=0; i>row; i++){
@@ -29,11 +23,28 @@ class Matrix {
 		return newMatrix;
 	};
 
+	private Matrix multiplyMatrices(Matrix matrix2){
+		if(column != matrix2.matrix.length)
+			return new Matrix(0,0);
+		Matrix newMatrix = new Matrix(row, column);
+		for(int i=0; i<row; i++){
+			for(int j=0; j<matrix2.matrix[0].length; j++){
+				int sum = 0;
+				for(int k=0; k<column; k++){
+					sum += matrix[i][k] * matrix2.matrix[k][j]; 
+				}
+				newMatrix.populateMatrix(i+1,j+1,sum);
+			}
+		}
+		return newMatrix;
+	}
+
 // ----------------------------public methods --------------------------------------
 
 	public void populateMatrix(int rowPosition, int columnPosition, int value){
-		this.enterValues(rowPosition, columnPosition, value);
+		matrix[rowPosition-1][columnPosition-1] = value;
 	};
+
 	public Matrix getSumWith(Matrix matrix2){
 		return this.addMatrices(matrix2);
 	}
@@ -47,8 +58,13 @@ class Matrix {
 		}
 		return true;
 	};
+
 	public int getLengthOfMatrix(){
 		return this.matrix.length;
 	};
+
+	public Matrix getMultiplicationWith(Matrix matrix2){
+		return this.multiplyMatrices(matrix2);
+	}
 
 }
