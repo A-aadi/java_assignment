@@ -37,7 +37,34 @@ public class Matrix {
 			}
 		}
 		return newMatrix;
-	}
+	};
+
+	private int getDeterminant(){
+		int det = 0, sign = 1, p = 0, q = 0;
+		int matrix_size = this.matrix.length;
+		if(matrix_size==1)
+			det = this.matrix[0][0];
+		else{
+			Matrix new_matrix = new Matrix(matrix_size-1, matrix_size-1);
+			for(int x = 0; x < matrix_size ; x++){
+				p=0;q=0;
+				for(int i = 1;i < matrix_size; i++){
+					for(int j = 0; j < matrix_size; j++){
+						if(j != x){
+							new_matrix.matrix[p][q++] = this.matrix[i][j];
+							if(q % (matrix_size-1) == 0){
+								p++;
+								q=0;
+							};
+						};
+					};
+				};
+				det = det + this.matrix[0][x] * new_matrix.getDeterminant() * sign;
+				sign = -sign;
+		};
+	};
+	return det;
+	};
 
 // ----------------------------public methods --------------------------------------
 
@@ -65,6 +92,10 @@ public class Matrix {
 
 	public Matrix getMultiplicationWith(Matrix matrix2){
 		return this.multiplyMatrices(matrix2);
+	};
+
+	public int getDeterminantOf(){
+		return this.getDeterminant();
 	}
 
 }
