@@ -1,7 +1,5 @@
 package com;
 
-import static java.lang.Integer.parseInt;
-
 public class HashCodeGenerator<T>{
     public HashCodeGenerator(){
     }

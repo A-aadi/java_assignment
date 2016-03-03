@@ -6,13 +6,13 @@ package com;
 public class LinkedList<K, V> {
     K key;
     V value;
-    static LinkedList next = null;
+    LinkedList next = null;
 
-    public LinkedList() {
+//    public LinkedList(K key,V value) {
 //        this.key = key;
-//        this.value = value;
-//        this.next = null;
-    }
+//        this.value = val
+//    }
+
 
     public void setKey(K key){
         this.key = key;
